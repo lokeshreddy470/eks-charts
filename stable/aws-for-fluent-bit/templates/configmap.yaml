@@ -30,6 +30,17 @@ data:
         Skip_Long_Lines   {{ .Values.input.skipLongLines }}
         Refresh_Interval  {{ .Values.input.refreshInterval }}
 {{- end }}
+
+{{- if .Values.splunk.enabled }}
+    [INPUT]
+        Name              splunk
+        Match             {{ .Values.splunk.match }}
+        splunk_token      {{ .Values.splunk.token }}
+        host              {{ .Values.splunk.host }}
+        port              {{ .Values.splunk.port }}
+        Docker_Mode       {{ .Values.input.dockerMode }}
+{{- end }}
+
 {{- if .Values.input.extraInputs }}
 {{ .Values.input.extraInputs | indent 8 }}
 {{- end }}
